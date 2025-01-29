@@ -5,25 +5,25 @@ import BudgetItem from "./BudgetItem";
 import { useEffect } from "react";
 
 
-const startingTransactions = [
-    { id: crypto.randomUUID(), ammount: 1350, comment: "Atlyginimas", type: "income" },
-    { id: crypto.randomUUID(), ammount: -450, comment: "Kredit", type: "expense" },
-    { id: crypto.randomUUID(), ammount: -250, comment: "Maistui", type: "expense" }
-]
+// const startingTransactions = [
+//     { id: crypto.randomUUID(), ammount: 1350, comment: "Atlyginimas", type: "income" },
+//     { id: crypto.randomUUID(), ammount: -450, comment: "Kredit", type: "expense" },
+//     { id: crypto.randomUUID(), ammount: -250, comment: "Maistui", type: "expense" }
+// ]
 
-const sum = startingTransactions.reduce((accumulator, object) => {
-    return accumulator + object.ammount;
-}, 0);
+// const sum = startingTransactions.reduce((accumulator, object) => {
+//     return accumulator + object.ammount;
+// }, 0);
 
 
-// const initBalance = () => {
-//     const data = JSON.parse(localStorage.getItem("balance"));
+// const getInitialData = () => {
+//     const data = JSON.parse(localStorage.getItem("transactions"));
 //     if (!data) return 0;
 //     return data;
 // }
 
 const getInitialData = () => {
-    const data = JSON.parse(localStorage.getItem("transacions"));
+    const data = JSON.parse(localStorage.getItem("transactions"));
     if (!data) return [];
     return data;
 }
@@ -31,11 +31,15 @@ const getInitialData = () => {
 
 export default function BudgetTracker() {
     const [balance, setBalance] = useState(50);
-    const [transactions, setTransaction] = useState(startingTransactions);
+    const [transactions, setTransaction] = useState(getInitialData);
 
     useEffect(() => {
-        sumUp()
-    }, [transactions]);
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+      }, [transactions])
+
+    // useEffect(() => {
+    //     sumUp()
+    // }, [transactions]);
 
     const addTransaction = (value, text) => {
         setTransaction(prevTransactions => {
@@ -43,12 +47,14 @@ export default function BudgetTracker() {
         })
     }
     const sumUp = () => {
+
+
         // var x = parseInt("1000", 10)
-        const newSum = transactions.reduce((accumulator, object) => {
-            return accumulator + object.ammount;
-        }, 0)
-        let parsed = parseInt(balance, 10);
-        setBalance(newSum +  parsed)
+        // const newSum = transactions.reduce((accumulator, object) => {
+        //     return accumulator + object.ammount;
+        // }, 0)
+        // let parsed = parseInt(balance, 10);
+        // setBalance(newSum +  parsed)
     }
 
     return (
