@@ -5,22 +5,6 @@ import BudgetItem from "./BudgetItem";
 import { useEffect } from "react";
 
 
-// const startingTransactions = [
-//     { id: crypto.randomUUID(), ammount: 1350, comment: "Atlyginimas", type: "income" },
-//     { id: crypto.randomUUID(), ammount: -450, comment: "Kredit", type: "expense" },
-//     { id: crypto.randomUUID(), ammount: -250, comment: "Maistui", type: "expense" }
-// ]
-
-// const sum = startingTransactions.reduce((accumulator, object) => {
-//     return accumulator + object.ammount;
-// }, 0);
-
-
-// const getInitialData = () => {
-//     const data = JSON.parse(localStorage.getItem("transactions"));
-//     if (!data) return 0;
-//     return data;
-// }
 
 const getInitialData = () => {
     const data = JSON.parse(localStorage.getItem("transactions"));
@@ -28,14 +12,32 @@ const getInitialData = () => {
     return data;
 }
 
+const initialBalance = () => {
+    const data = JSON.parse(localStorage.getItem("transactions"));
+    return data;
+}
+
+const initData = initialBalance();
+
+const sum = initData.reduce((accumulator, transac) => {
+    return parseInt(accumulator) + parseInt(transac.ammount);
+}, 0);
+
 
 export default function BudgetTracker() {
-    const [balance, setBalance] = useState(50);
+    const [balance, setBalance] = useState(sum);
     const [transactions, setTransaction] = useState(getInitialData);
 
     useEffect(() => {
         localStorage.setItem("transactions", JSON.stringify(transactions));
       }, [transactions])
+
+    
+
+
+    //   const sum = transactions.reduce((accumulator, transac) => {
+    //     return accumulator + transac.ammount;
+    // }, 0);
 
     // useEffect(() => {
     //     sumUp()
@@ -45,6 +47,13 @@ export default function BudgetTracker() {
         setTransaction(prevTransactions => {
             return [...prevTransactions, { id: crypto.randomUUID(), ammount: value, comment: text }];
         })
+
+        console.log(transactions);
+
+        const sumUp = transactions.reduce((accumulator, transac) => {
+            return parseInt(accumulator) + parseInt(transac.ammount);
+        }, 0);
+        setBalance(sumUp);
     }
     const sumUp = () => {
 
