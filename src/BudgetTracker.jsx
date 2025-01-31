@@ -3,6 +3,8 @@ import BudgetForm from "./BudgetForm";
 import { Box, List } from "@mui/material";
 import BudgetItem from "./BudgetItem";
 import { useEffect } from "react";
+import { Container } from "@mui/material";
+import './bt.css'
 
 
 
@@ -30,41 +32,31 @@ export default function BudgetTracker() {
 
     useEffect(() => {
         localStorage.setItem("transactions", JSON.stringify(transactions));
-      }, [transactions])
+        const sumUp = transactions.reduce((accumulator, transac) => {
+            return parseInt(accumulator) + parseInt(transac.ammount);
+        }, 0);
+        setBalance(sumUp);
+    }, [transactions])
 
-    
-
-
-    //   const sum = transactions.reduce((accumulator, transac) => {
-    //     return accumulator + transac.ammount;
-    // }, 0);
-
-    // useEffect(() => {
-    //     sumUp()
-    // }, [transactions]);
+    const removeTransaction = (id) => {
+        setTransaction(prevTransactions => {
+            return prevTransactions.filter((t) => t.id != id);
+        });
+    };
 
     const addTransaction = (value, text) => {
         setTransaction(prevTransactions => {
             return [...prevTransactions, { id: crypto.randomUUID(), ammount: value, comment: text }];
         })
-
-        console.log(transactions);
-
-        const sumUp = transactions.reduce((accumulator, transac) => {
-            return parseInt(accumulator) + parseInt(transac.ammount);
-        }, 0);
-        setBalance(sumUp);
     }
-    const sumUp = () => {
+    
+   
+
+    const fullTransactions = transactions.slice(0).reverse() // reverse the transaction list, newest at the top
+
+    const fewTransactions = fullTransactions.slice(0, 5);
 
 
-        // var x = parseInt("1000", 10)
-        // const newSum = transactions.reduce((accumulator, object) => {
-        //     return accumulator + object.ammount;
-        // }, 0)
-        // let parsed = parseInt(balance, 10);
-        // setBalance(newSum +  parsed)
-    }
 
     return (
         <Box sx={{
@@ -76,11 +68,17 @@ export default function BudgetTracker() {
         }}>
             <h1>Current Balance: {balance} </h1>
             <BudgetForm addTransaction={addTransaction} />
+
             <List >
-                {transactions.map(transaction => {
-                    return <BudgetItem transaction={transaction} key={transaction.id} />
+                {fewTransactions.map(transaction => {
+                    return <BudgetItem
+                        transaction={transaction}
+                        key={transaction.id}
+                        remove={() => removeTransaction(transaction.id)}
+                    />
                 })}
             </List>
+            <h4 >See More</h4>
         </Box>
     )
 }

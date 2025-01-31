@@ -21,16 +21,11 @@ export default function BudgetForm({ addTransaction }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         addTransaction(value, text);
+        setText("");
+        setValue("");
     }
-
-    const plusBalance = (e) => {
-        e.preventDefault();
-
-    }
-
-
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ position: "sticky", top: "0" }} >
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -38,6 +33,7 @@ export default function BudgetForm({ addTransaction }) {
                 p: 1
             }}>
                 <TextField
+                    style={{ color: 'white' }}
                     id="outlined-number"
                     label="Enter ammount"
                     type="number"
@@ -50,13 +46,14 @@ export default function BudgetForm({ addTransaction }) {
                     }}
                 />
                 <TextField
+                    style={{ color: 'white' }}
                     id="outlined-basic"
                     label="Outlined"
                     variant="outlined"
                     onChange={handleChangeTxt}
                     value={text}
                 />
-                <Button sx={{ ml: 2 }} variant="contained" color="success" type="submit">Income</Button>
+                <Button sx={{ ml: 2 }} variant="contained" color="success" type="submit" >Income</Button>
                 <Button sx={{ ml: 2 }} variant="contained">Expense</Button>
             </Box>
         </form>
