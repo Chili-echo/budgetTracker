@@ -43,6 +43,26 @@
 html {
   font-family:'Roboto', Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  background-image: url('');
+  background-size: 30%;
+}
 .form {
   position: sticky;
+}
+
+.formBackground {
+  background-color: rgba(255, 237, 222, 0.9);
+}
+
+.fullOpac {
+  background-color: rgb(255, 255, 255);
+}
+
+.textField {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.textField:focus {
+  background-color: rgba(255, 255, 255, 1.0);
 }

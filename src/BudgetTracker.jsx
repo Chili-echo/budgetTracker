@@ -5,6 +5,7 @@ import BudgetItem from "./BudgetItem";
 import { useEffect } from "react";
 import { Container } from "@mui/material";
 import './bt.css'
+import './App.css'
 
 
 
@@ -29,6 +30,7 @@ const sum = initData.reduce((accumulator, transac) => {
 export default function BudgetTracker() {
     const [balance, setBalance] = useState(sum);
     const [transactions, setTransaction] = useState(getInitialData);
+    const [listLength, setListLength] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -49,12 +51,16 @@ export default function BudgetTracker() {
             return [...prevTransactions, { id: crypto.randomUUID(), ammount: value, comment: text }];
         })
     }
-    
-   
+
+
 
     const fullTransactions = transactions.slice(0).reverse() // reverse the transaction list, newest at the top
 
     const fewTransactions = fullTransactions.slice(0, 5);
+
+    const repopulate = () => {
+        setListLength(!listLength);
+    }
 
 
 
@@ -64,21 +70,36 @@ export default function BudgetTracker() {
             justifyContent: 'center',
             flexDirection: 'column',
             alignItems: 'center',
-            m: 3
-        }}>
-            <h1>Current Balance: {balance} </h1>
-            <BudgetForm addTransaction={addTransaction} />
+            m: 3,
 
-            <List >
-                {fewTransactions.map(transaction => {
-                    return <BudgetItem
-                        transaction={transaction}
-                        key={transaction.id}
-                        remove={() => removeTransaction(transaction.id)}
-                    />
-                })}
-            </List>
-            <h4 >See More</h4>
+        }}>
+            <Container
+                className="formBackground"
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+
+            >
+                <h1 className="fullOpac">Current Balance: {balance} </h1>
+                <BudgetForm
+                    addTransaction={addTransaction}
+                    className="formBackground"
+                />
+
+                <List>
+                    {((listLength) ? fullTransactions : fewTransactions).map(transaction => {
+                        return <BudgetItem
+                            transaction={transaction}
+                            key={transaction.id}
+                            remove={() => removeTransaction(transaction.id)}
+                        />
+                    })}
+                </List>
+                {(transactions.length > 5) ? <h4 style={{ userSelect: "none" }} onClick={repopulate}>See More</h4> : ""}
+            </Container>
         </Box>
     )
 }
