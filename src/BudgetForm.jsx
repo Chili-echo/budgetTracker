@@ -1,13 +1,14 @@
 import { useState } from "react";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Box } from "@mui/material";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
 
 export default function BudgetForm({ addTransaction }) {
 
     const [value, setValue] = useState("");
     const [text, setText] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [type, setType] = useState("");
     const makeNegative = () => {
         const negativeValue = -Math.abs(value);
         setValue(negativeValue);
@@ -21,60 +22,42 @@ export default function BudgetForm({ addTransaction }) {
         setText(evt.target.value)
     }
 
+    const handleChangeType = (evt) => {
+        setType(evt.target.value)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        // const shortDate = startDate.toLocaleDateString('lt-LT');
         if (!value || !text) return;
-        addTransaction(value, text);
+        addTransaction(value, text, startDate, type);
         setText("");
         setValue("");
     }
-    const date = new Date();
 
     return (
-        <form onSubmit={handleSubmit} style={{ position: "sticky", top: "0" }} >
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                p: 1,
-                mr: 1,
-            }}>
-                <TextField
-                    sx={{
-                        mr: 2,
-                        
-                    }}
-                    className="textField"
-                    style={{ color: 'white' }}
-                    id="outlined-basic"
-                    label="Outlined"
-                    variant="outlined"
-                    onChange={handleChangeTxt}
-                    value={text}
-                />
-                <TextField
 
-                    sx={{
-                        maxWidth: '150px'
-                    }}
-                    className="textField"
-                    style={{ color: 'white' }}
-                    id="outlined-number"
-                    label="Enter ammount"
-                    type="number"
-                    onChange={handleChangeVal}
-                    value={value}
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
-                />
-                <input type="date" value={date} />
-                
-                <Button sx={{ ml: 2 }} variant="contained" color="success" type="submit" >Income</Button>
-                <Button sx={{ ml: 2 }} variant="contained" onClick={makeNegative} type="submit">Expense</Button>
-            </Box>
+        <form onSubmit={handleSubmit} style={{ position: "sticky", top: "0" }} className="budgetForm" >
+
+            <input type="text" placeholder="Description" id="description" label="Description" onChange={handleChangeTxt} value={text} className="formItem" />
+            <input type="number" placeholder="Enter Ammount" id="number" onChange={handleChangeVal} value={value} className="formItem"/>
+            <select name="transacs" id="transacs" onChange={handleChangeType} value={type} className="formItem">
+                <option value="income">income</option>
+                <option value="utilities">utilities</option>
+                <option value="groceries">groceries</option>
+                <option value="entertainment">entertainment</option>
+            </select>
+                <div className="formItem formItemDate">
+                    <DatePicker
+                        className=""
+                        stlye={{}}
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                    />
+                </div>
+                <button type="submit" className="formItem">Income</button>
+                <button onClick={makeNegative} type="submit" className="formItem">Expense</button>
         </form>
+
     )
 }

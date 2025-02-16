@@ -1,24 +1,22 @@
-import { ListItem } from "@mui/material";
-import { ListItemText } from "@mui/material";
-import ListItemIcon from '@mui/material/ListItemIcon';
-import IconButton from '@mui/material/IconButton';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import './App.css'
 
 export default function BudgetItem({ transaction, remove }) {
-    const labelId = `checkbox-list-label-${transaction.id}`;
+    // const labelId = `checkbox-list-label-${transaction.id}`;
+
+    const date = transaction.date;
+    // const formatedDate = date.toLocaleDateString('lt-LT');
+    // console.log(typeof date);
+    // console.log(new Date(date).getMonth());
+    const formatedDate = new Date(date).toLocaleDateString('lt-LT');
     return (
         <>
-            <ListItem
-                key={transaction.id}
-                secondaryAction={
-                    <IconButton edge="end" aria-label="comments" onClick={remove}>
-                        <HighlightOffIcon />
-                    </IconButton>
-                }
-            >
-                <ListItemText
-                    id={labelId} primary={transaction.comment} secondary={transaction.ammount} />
-            </ListItem>
+            <li key={transaction.id}>
+                <span>{transaction.ammount} € - {transaction.comment}</span> 
+                <span onClick={remove}> Delete</span>
+                <br />
+                <span>{transaction.type} {formatedDate}</span>
+            </li>
+
         </>
     )
 }
