@@ -8,7 +8,7 @@ export default function BudgetForm({ addTransaction }) {
     const [value, setValue] = useState("");
     const [text, setText] = useState("");
     const [startDate, setStartDate] = useState(new Date());
-    const [type, setType] = useState("");
+    const [type, setType] = useState("income");
     const makeNegative = () => {
         const negativeValue = -Math.abs(value);
         setValue(negativeValue);
@@ -34,7 +34,6 @@ export default function BudgetForm({ addTransaction }) {
         setText("");
         setValue("");
     }
-
     return (
 
         <form onSubmit={handleSubmit} style={{ position: "sticky", top: "0" }} className="budgetForm" >

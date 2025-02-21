@@ -10,11 +10,14 @@ export default function BudgetItem({ transaction, remove }) {
     const formatedDate = new Date(date).toLocaleDateString('lt-LT');
     return (
         <>
-            <li key={transaction.id}>
-                <span>{transaction.ammount} € - {transaction.comment}</span> 
-                <span onClick={remove}> Delete</span>
-                <br />
-                <span>{transaction.type} {formatedDate}</span>
+            <li className='listLine' key={transaction.id}>
+                <div className="leftListItem">
+                    <span>{transaction.type}</span> <span>{transaction.comment}</span>
+                    <span onClick={remove}> <button>X</button></span>
+                    <br />
+                    <span>{formatedDate}</span>
+                </div>
+                <div className='rightListItem'>{transaction.ammount} €</div>
             </li>
 
         </>

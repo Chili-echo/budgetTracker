@@ -1,99 +1,112 @@
+html {
+  all: unset;
+}
+
+ul {
+  all: unset;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
-
-/* @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-} */
-/*
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */
 html {
-  font-family:'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'Inter', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: lighter;
 }
 
-/* .datePickerDiv {
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-} */
-
-/* .datePicker {
-  all: unset;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  text-align: center;
-  max-width: 100px;
-  margin-right: 1rem;
-  border-radius: 3px;
-  outline: 1px solid rgb(201, 201, 201);
-  padding: 16.5px;
-  color: rgb(138, 138, 138);
-  color: rgba(0, 0, 0, 0.87);
-} */
-
-
-/* .buttonInc {
-  background-color: red;
-  color: red;
-} */
-
+.listStyle {
+  transition: all 1s ease-out;
+}
 body {
+  background-color: #E8F5F0
+}
+
+.mainSection {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1248px;
+}
+
+.topSection {
   display: flex;
   justify-content: space-evenly;
 }
 
-.leftPanel {
-  padding: 50px;
-  margin: 10px;
+
+.balanceModule {
+  color: #4B5563;
+  padding: 24px;
+  max-width: 400px;
+  max-height: 148px;
+  width: 400px;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-size: 12pt;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.055);
+}
+.balanceModule:nth-child(2) {
+  margin: 0 24px;
+}
+.balanceModule h2 {
+  color: #1F2937;
 }
 
-.mainDisplay {
+.innerModule {
+  min-width: 150px;
+  margin: 5px 0;
+}
+
+.listSection {
+  text-align: left;
+  background-color: #FFFFFF;
+  margin-top: 24px;
+  border-radius: 12px;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.055);
+}
+
+.topPartOfList {
   display: flex;
   justify-content: space-between;
 }
 
-.trackerApp {
- display: flex;
- justify-content: center;
- flex-direction: column;
- align-items: center;
+.recentTransactions {
+  color: #1F2937;
+  margin: 24px;
+  font-weight:bold;
+  font-size: 1.3rem;
 }
 
-.budgetForm {
+.sortBy {
+  display: flex;
+  margin: 24px;
+}
+
+.sortByMonth {
+  margin-right: 13px;
+}
+
+.sortByCategory {
+ 
+}
+
+.budgetList {
+  font-size: 1.1rem;
+}
+
+.listLine {
+  margin: 34px 54px;
   display: flex;
   justify-content: space-between;
 }
 
-.currBalance {
-  font-size: 1.5rem;
-}
-
-.formItem {
-  margin: 5px;
-  padding: 5px;
-}
-.formItemDate {
-  padding: 0px;
-}
-
-/* .react-datepicker__input-container {
+.leftListItem {
   
-} */
-
-.listStyle {
-  transition: all 1s ease-out;
 }
