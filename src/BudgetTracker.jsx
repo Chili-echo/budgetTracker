@@ -6,6 +6,8 @@ import './App.css'
 import BudgetList from "./BudgetList";
 import SortByMonth from "./SortByMonth";
 import SortByCategory from "./SortByCategory";
+import { motion } from "framer-motion";
+import Modal from "./Modal";
 
 
 
@@ -25,6 +27,9 @@ export default function BudgetTracker() {
     const [month, setMonth] = useState(initMonth);
     const [category, setCategory] = useState('all');
     const [formVisible, setFormVisible] = useState(false);
+
+    const open = () => setFormVisible(true);
+    const close = () => setFormVisible(false);
 
     useEffect(() => {                                                        //save to localStorage when "transactions" is updated
         localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -108,6 +113,8 @@ export default function BudgetTracker() {
         setFormVisible(false);
     }
 
+
+
     return (
         <div className="mainSection">
 
@@ -140,10 +147,15 @@ export default function BudgetTracker() {
                             handleChangeCategory={handleChangeCategory}
                             category={category}
                         />
-                        <button className="mainButtons" onClick={handleNewEventButton}>+ Add New</button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="mainButtons"
+                            onClick={() => (formVisible ? close() : open())}
+                        >+ Add New</motion.button>
                     </div>
                 </div>
-                {!formVisible && <div className="budgetList">
+                <div className="budgetList">
                     <BudgetList
                         transactions={transactions}
                         listLength={listLength}
@@ -153,15 +165,15 @@ export default function BudgetTracker() {
                         repopulate={repopulate}
                         removeTransaction={removeTransaction}
                     />
-                </div>}
+                </div>
 
             </div>
-            {formVisible && <BudgetForm
+            {/* {formVisible && <BudgetForm
                 addTransaction={addTransaction}
                 handleCloseButton={handleCloseButton}
                 className="formBackground"
-            />}
-
+            />} */}
+        {formVisible && <Modal modalOpen={formVisible} handleClose={close}/>}
         </div>
 
     )

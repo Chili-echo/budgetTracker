@@ -199,6 +199,24 @@ body {
 }
 
 .budgetForm {
+  background-color: #E8F5F0;
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.modal {
+  width: clamp(50%, 700px, 90%);
+  height: min(50%, 300px);
+
+  padding: 0 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
 }
 
@@ -211,6 +229,18 @@ body {
   height: 42px;
   border-radius: 8px;
   border: none
+}
+
+.formItem {
+  text-align: left;
+  margin: 6px;
+  padding: 5px;
+  font-size: 16px;
+  font-family: unset;
+  background-color: #F5F9F7;
+  /* height: 42px; */
+  border-radius: 8px;
+  border: 1px solid #1F2937;
 }
 
 .formItemButton {
@@ -286,4 +316,16 @@ body {
   margin-right: 80px;
   justify-content: center;
   align-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
