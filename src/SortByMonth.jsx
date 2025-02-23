@@ -1,6 +1,6 @@
 export default function SortByMonth({ handleChangeMonth, month }) {
     return (
-        <div className="sortByMonth">
+        <div className="selectButtons sortByMonth">
             <select name="months" id="months" onChange={handleChangeMonth} value={month}>
                 <option value="99">All transactions</option>
                 <option value="0">January 2025</option>

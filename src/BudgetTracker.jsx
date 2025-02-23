@@ -104,8 +104,7 @@ export default function BudgetTracker() {
         setFormVisible(true);
     }
 
-    const handleCloseButton = (e) => {
-        e.preventDefault();
+    const handleCloseButton = () => {
         setFormVisible(false);
     }
 
@@ -141,11 +140,12 @@ export default function BudgetTracker() {
                             handleChangeCategory={handleChangeCategory}
                             category={category}
                         />
-                        <button onClick={handleNewEventButton}>ADD NEW</button>
+                        <button className="mainButtons" onClick={handleNewEventButton}>+ Add New</button>
                     </div>
                 </div>
                 {!formVisible && <div className="budgetList">
                     <BudgetList
+                        transactions={transactions}
                         listLength={listLength}
                         fullTransactions={fullTransactions}
                         fewTransactions={fewTransactions}

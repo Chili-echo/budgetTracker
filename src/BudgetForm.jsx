@@ -55,9 +55,9 @@ export default function BudgetForm({ addTransaction, handleCloseButton }) {
                         onChange={(date) => setStartDate(date)}
                     />
                 </div>
-                <button type="submit" className="formItem">Income</button>
-                <button onClick={makeNegative} type="submit" className="formItem">Expense</button>
-                <button onClick={handleCloseButton}>CLOSE</button>
+                <button type="submit" className="formItemButton">Income</button>
+                <button onClick={makeNegative} type="submit" className="formItemButton formItemButtonExpense">Expense</button>
+                <button onClick={handleCloseButton} className="formItemButton">CLOSE</button>
         </form>
 
     )

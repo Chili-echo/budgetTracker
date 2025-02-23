@@ -1,8 +1,9 @@
 import BudgetItem from "./BudgetItem";
 
-export default function BudgetList({ listLength, fullTransactions, fewTransactions, doubleFilterred, repopulate, removeTransaction }) {
+export default function BudgetList({ transactions, listLength, fullTransactions, fewTransactions, doubleFilterred, repopulate, removeTransaction }) {
     return (
         <div>
+            {transactions.length === 0 && <div className="outterTransacEmpty"><div className="emptyTransacs">Transactions List Empty</div></div>}
             <ul className="listStyle">
 
                 {((listLength) ? fullTransactions : fewTransactions).map(transaction => {

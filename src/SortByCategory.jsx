@@ -1,6 +1,6 @@
 export default function SortByCategory({ handleChangeCategory, category }) {
     return (
-        <div className="sortByCategory">
+        <div className="selectButtons sortByCategory">
             <select name="category" id="category" onChange={handleChangeCategory} value={category}>
                 <option value="all">All categories</option>
                 <option value="income">Income</option>
