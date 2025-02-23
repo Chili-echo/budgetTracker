@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
 
-export default function BudgetForm({ addTransaction }) {
+export default function BudgetForm({ addTransaction, handleCloseButton }) {
 
     const [value, setValue] = useState("");
     const [text, setText] = useState("");
@@ -56,6 +56,7 @@ export default function BudgetForm({ addTransaction }) {
                 </div>
                 <button type="submit" className="formItem">Income</button>
                 <button onClick={makeNegative} type="submit" className="formItem">Expense</button>
+                <button onClick={handleCloseButton}>CLOSE</button>
         </form>
 
     )

@@ -24,6 +24,7 @@ export default function BudgetTracker() {
     const [listLength, setListLength] = useState(false);                //re-render because list length changes, true = long list, false = only 5 items
     const [month, setMonth] = useState(initMonth);
     const [category, setCategory] = useState('all');
+    const [formVisible, setFormVisible] = useState(false);
 
     useEffect(() => {                                                        //save to localStorage when "transactions" is updated
         localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -98,6 +99,16 @@ export default function BudgetTracker() {
         setCategory(evt.target.value)
     }
 
+    const handleNewEventButton = (evt) => {
+        evt.stopPropagation();
+        setFormVisible(true);
+    }
+
+    const handleCloseButton = (evt) => {
+        evt.stopPropagation();
+        setFormVisible(false);
+    }
+
     return (
         <div className="mainSection">
 
@@ -130,9 +141,10 @@ export default function BudgetTracker() {
                             handleChangeCategory={handleChangeCategory}
                             category={category}
                         />
+                        <button onClick={handleNewEventButton}>ADD NEW</button>
                     </div>
                 </div>
-                <div className="budgetList">
+                {!formVisible && <div className="budgetList">
                     <BudgetList
                         listLength={listLength}
                         fullTransactions={fullTransactions}
@@ -141,13 +153,14 @@ export default function BudgetTracker() {
                         repopulate={repopulate}
                         removeTransaction={removeTransaction}
                     />
-                </div>
+                </div>}
 
             </div>
-            <BudgetForm
+            {formVisible && <BudgetForm
                 addTransaction={addTransaction}
+                handleCloseButton={handleCloseButton}
                 className="formBackground"
-            />
+            />}
 
         </div>
 

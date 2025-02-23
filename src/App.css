@@ -5,6 +5,12 @@ html {
 ul {
   all: unset;
 }
+p {
+  all: unset;
+}
+span {
+  all: unset;
+}
 
 #root {
   max-width: 1280px;
@@ -15,9 +21,10 @@ ul {
   justify-content: space-around;
 }
 
-html {
-  font-family:'Inter', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: lighter;
+body {
+  font-family:'Funnel Sans', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .listStyle {
@@ -49,7 +56,7 @@ body {
   border-radius: 12px;
   background-color: #FFFFFF;
   text-align: left;
-  font-size: 12pt;
+  font-size: 16px;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.055);
 }
 .balanceModule:nth-child(2) {
@@ -57,11 +64,16 @@ body {
 }
 .balanceModule h2 {
   color: #1F2937;
+  font-size: 24px;
 }
 
 .innerModule {
   min-width: 150px;
   margin: 5px 0;
+}
+
+.innerModule:first-child {
+  color: #4B5563;
 }
 
 .listSection {
@@ -81,7 +93,7 @@ body {
   color: #1F2937;
   margin: 24px;
   font-weight:bold;
-  font-size: 1.3rem;
+  font-size: 20px;
 }
 
 .sortBy {
@@ -93,20 +105,66 @@ body {
   margin-right: 13px;
 }
 
-.sortByCategory {
+/* .sortByCategory {
  
-}
+} */
 
 .budgetList {
-  font-size: 1.1rem;
+  font-size: 16px;
+  font-weight:light;
+  color: #1F2937;
 }
 
 .listLine {
-  margin: 34px 54px;
+  margin: 34px 44px;
   display: flex;
   justify-content: space-between;
 }
 
 .leftListItem {
-  
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align content to the start */
+}
+
+.leftListItem div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+.listDate {
+  margin-top: 4px; /* Space between comment and date */
+  font-size: 14px;
+  color: gray;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: #E8F5F0;
+  color: #4CAF93;
+  padding: 5px;
+  border-radius: 30px;
+}
+
+.icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+.seeMore {
+  font-size: 16px;
+  padding: 10px;
+  margin: 34px 44px;
+  outline: 1px solid #4B5563;
+  color: #4B5563;
+  border-radius: 5px;
+  text-align: center;
 }
