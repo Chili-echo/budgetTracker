@@ -104,8 +104,8 @@ export default function BudgetTracker() {
         setFormVisible(true);
     }
 
-    const handleCloseButton = (evt) => {
-        evt.stopPropagation();
+    const handleCloseButton = (e) => {
+        e.preventDefault();
         setFormVisible(false);
     }
 

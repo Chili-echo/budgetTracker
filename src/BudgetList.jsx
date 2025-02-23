@@ -13,9 +13,7 @@ export default function BudgetList({ listLength, fullTransactions, fewTransactio
                     />
                 })}
             </ul>
-            <div className="seeMore" onClick={repopulate}>
-                {(doubleFilterred.length > 5) ? <p style={{ userSelect: "none" }}>{!listLength ? "See More" : "See Less"}</p> : ""}
-            </div> {/* if transaction length is more than 5, then show a string - if listLength true - "See less", else "See more" */}
+            {(doubleFilterred.length > 5) ? <div className="seeMore" onClick={repopulate}><p style={{ userSelect: "none" }}>{!listLength ? "See More" : "See Less"}</p></div> : ""} {/* if transaction length is more than 5, then show a string - if listLength true - "See less", else "See more" */}
         </div>
     )
 }

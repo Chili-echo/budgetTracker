@@ -33,6 +33,7 @@ export default function BudgetForm({ addTransaction, handleCloseButton }) {
         addTransaction(value, text, startDate, type);
         setText("");
         setValue("");
+        handleCloseButton();
     }
     return (
 
