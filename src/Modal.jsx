@@ -23,7 +23,7 @@ import BudgetForm from "./BudgetForm";
 //     },
 // }
 
-export default function Modal({ handleClose }) {
+export default function Modal({ handleClose, addTransaction }) {
     return (
         <Backdrop onClick={handleClose}>
             <motion.div 
@@ -38,7 +38,10 @@ export default function Modal({ handleClose }) {
             }}
             exit={{ opacity: 0, scale: 0}}
             >   
-                <BudgetForm handleClose={handleClose} />
+                <BudgetForm 
+                handleClose={handleClose}
+                addTransaction={addTransaction}
+                />
             </motion.div>
         </Backdrop>
     )

@@ -173,9 +173,12 @@ export default function BudgetTracker() {
                 handleCloseButton={handleCloseButton}
                 className="formBackground"
             />} */}
-        {formVisible && <Modal modalOpen={formVisible} handleClose={close}/>}
+            {formVisible && <Modal 
+            modalOpen={formVisible} 
+            handleClose={close} 
+            addTransaction={addTransaction} 
+            />}
         </div>
-
     )
 
 }
