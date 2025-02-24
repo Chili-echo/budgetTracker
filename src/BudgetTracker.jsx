@@ -6,7 +6,7 @@ import './App.css'
 import BudgetList from "./BudgetList";
 import SortByMonth from "./SortByMonth";
 import SortByCategory from "./SortByCategory";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
 
 
@@ -173,11 +173,20 @@ export default function BudgetTracker() {
                 handleCloseButton={handleCloseButton}
                 className="formBackground"
             />} */}
-            {formVisible && <Modal 
-            modalOpen={formVisible} 
-            handleClose={close} 
-            addTransaction={addTransaction} 
-            />}
+
+
+            <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+            >
+                {formVisible && <Modal
+                    modalOpen={formVisible}
+                    handleClose={close}
+                    addTransaction={addTransaction}
+                />}
+            </AnimatePresence>
+
         </div>
     )
 
