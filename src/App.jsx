@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import BudgetTracker from './budgetTracker'
 import Navbar from './Navbar'
+import { p } from 'framer-motion/client';
+import axios from "axios";
 
 function App() {
+
+
 
   return (
     <>
@@ -16,4 +20,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

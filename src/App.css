@@ -121,11 +121,15 @@ body {
   background-color: #F5F9F7;
   height: 42px;
   border-radius: 8px;
-  border: none
+  border: none;
 }
 
 .selectButtons option {
   text-align: left;
+}
+
+.selectButtons select:hover {
+  outline: 1px solid #4CAF93;
 }
 
 .sortBy {
@@ -138,7 +142,7 @@ body {
 }
 
 .sortByCategory {
- margin-right: 16px;
+  margin-right: 16px;
 }
 
 .budgetList {
