@@ -2,6 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
+import axios from "axios";
 
 export default function BudgetForm({ addTransaction, handleClose }) {
 
@@ -28,7 +29,6 @@ export default function BudgetForm({ addTransaction, handleClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const shortDate = startDate.toLocaleDateString('lt-LT');
         if (!value || !text) return;
         addTransaction(value, text, startDate, type);
         setText("");
@@ -37,11 +37,26 @@ export default function BudgetForm({ addTransaction, handleClose }) {
     }
     return (
 
-        <form onSubmit={handleSubmit} style={{ position: "sticky", top: "0" }} className="budgetForm" >
+        <form onSubmit={handleSubmit} style={{/*  position: "sticky", top: "0"  */}} className="budgetForm" >
 
             <div>
-                <input type="text" placeholder="Description" id="description" label="Description" onChange={handleChangeTxt} value={text} className="formItem" />
-                <input type="number" placeholder="Enter Ammount" id="number" onChange={handleChangeVal} value={value} className="formItem" />
+                <input
+                    type="text"
+                    placeholder="Description"
+                    id="description"
+                    label="Description"
+                    onChange={handleChangeTxt}
+                    value={text}
+                    className="formItem"
+                />
+                <input
+                    type="number"
+                    placeholder="Enter Ammount"
+                    id="number"
+                    onChange={handleChangeVal}
+                    value={value}
+                    className="formItem"
+                />
                 <select name="transacs" id="transacs" onChange={handleChangeType} value={type} className="formItem">
                     <option value="income">income</option>
                     <option value="utilities">utilities</option>

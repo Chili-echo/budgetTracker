@@ -1,6 +1,4 @@
 import { useState } from "react";
-import BudgetForm from "./BudgetForm";
-import BudgetItem from "./BudgetItem";
 import { useEffect } from "react";
 import './App.css'
 import BudgetList from "./BudgetList";
@@ -8,21 +6,23 @@ import SortByMonth from "./SortByMonth";
 import SortByCategory from "./SortByCategory";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
+import axios from "axios";
 
 
 
-const getInitialData = () => {                                          //load initial data from localStorage
-    const data = JSON.parse(localStorage.getItem("transactions"));
-    if (!data) return [];
-    return data;
-}
+// const getInitialData = () => {                                          //load initial data from localStorage
+//     const data = JSON.parse(localStorage.getItem("transactions"));
+//     if (!data) return [];
+//     return data;
+// }
 
 const d = new Date();
 let initMonth = d.getMonth();
 
 
 export default function BudgetTracker() {
-    const [transactions, setTransaction] = useState(getInitialData);
+    const [transactions, setTransaction] = useState([]);
+    const [newTransactions, setNewTransactions] = useState([]);
     const [listLength, setListLength] = useState(false);                //re-render because list length changes, true = long list, false = only 5 items
     const [month, setMonth] = useState(initMonth);
     const [category, setCategory] = useState('all');
@@ -31,9 +31,16 @@ export default function BudgetTracker() {
     const open = () => setFormVisible(true);
     const close = () => setFormVisible(false);
 
-    useEffect(() => {                                                        //save to localStorage when "transactions" is updated
-        localStorage.setItem("transactions", JSON.stringify(transactions));
-    }, [transactions])
+    // useEffect(() => {                                                        //save to localStorage when "transactions" is updated
+    //     localStorage.setItem("transactions", JSON.stringify(transactions));
+    // }, [transactions])
+    useEffect(() => {
+        axios.get("http://localhost:5000/transactions")
+            .then((response) => {
+                setTransaction(response.data);
+            })
+            .catch((error) => console.error("Error fetching transactions", error));
+    }, []);
 
     const removeTransaction = (id) => {                                 //delete button on transactions
         setTransaction(prevTransactions => {
@@ -41,11 +48,31 @@ export default function BudgetTracker() {
         });
     };
 
-    const addTransaction = (value, text, startDate, type) => {
-        setTransaction(prevTransactions => {
-            return [...prevTransactions, { id: crypto.randomUUID(), ammount: value, comment: text, date: new Date(startDate), type: type }];
-        });
+    const addTransaction = async (value, text, startDate, type) => {
+            setTransaction(prevTransactions => {
+                return [...prevTransactions, {
+                    id: crypto.randomUUID(),
+                    ammount: value,
+                    comment: text,
+                    date: new Date(startDate),
+                    type: type
+                }];
+            });
+            postTransaction();
+            // try {
+            //     axios.post("http://localhost:5000/transactions", transactions)
+            // } catch (error) {
+            //     console.log("Error:", error);
+            // }
+        }
+    const postTransaction = async () => {
+        try {
+            await axios.post("http://localhost:5000/transactions", transactions)
+        } catch (error) {
+            console.log("Error:", error);
+        }
     }
+    
 
     const filteredTransactions = transactions.filter((transac) => {
         if (parseInt(month) != 99) {
@@ -104,16 +131,6 @@ export default function BudgetTracker() {
         setCategory(evt.target.value)
     }
 
-    const handleNewEventButton = (evt) => {
-        evt.stopPropagation();
-        setFormVisible(true);
-    }
-
-    const handleCloseButton = () => {
-        setFormVisible(false);
-    }
-
-
 
     return (
         <div className="mainSection">
@@ -168,11 +185,6 @@ export default function BudgetTracker() {
                 </div>
 
             </div>
-            {/* {formVisible && <BudgetForm
-                addTransaction={addTransaction}
-                handleCloseButton={handleCloseButton}
-                className="formBackground"
-            />} */}
 
 
             <AnimatePresence
