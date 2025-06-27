@@ -22,7 +22,6 @@ let initMonth = d.getMonth();
 
 export default function BudgetTracker() {
     const [transactions, setTransaction] = useState([]);
-    const [newTransactions, setNewTransactions] = useState([]);
     const [listLength, setListLength] = useState(false);                //re-render because list length changes, true = long list, false = only 5 items
     const [month, setMonth] = useState(initMonth);
     const [category, setCategory] = useState('all');
@@ -34,6 +33,9 @@ export default function BudgetTracker() {
     // useEffect(() => {                                                        //save to localStorage when "transactions" is updated
     //     localStorage.setItem("transactions", JSON.stringify(transactions));
     // }, [transactions])
+
+
+
     useEffect(() => {
         axios.get("http://localhost:5000/transactions")
             .then((response) => {
@@ -42,37 +44,56 @@ export default function BudgetTracker() {
             .catch((error) => console.error("Error fetching transactions", error));
     }, []);
 
-    const removeTransaction = (id) => {                                 //delete button on transactions
-        setTransaction(prevTransactions => {
-            return prevTransactions.filter((t) => t.id != id);
-        });
-    };
-
-    const addTransaction = async (value, text, startDate, type) => {
-            setTransaction(prevTransactions => {
-                return [...prevTransactions, {
-                    id: crypto.randomUUID(),
-                    ammount: value,
-                    comment: text,
-                    date: new Date(startDate),
-                    type: type
-                }];
-            });
-            postTransaction();
-            // try {
-            //     axios.post("http://localhost:5000/transactions", transactions)
-            // } catch (error) {
-            //     console.log("Error:", error);
-            // }
-        }
-    const postTransaction = async () => {
+    const removeTransaction = async (id) => {                                 //delete button on transactions
         try {
-            await axios.post("http://localhost:5000/transactions", transactions)
+            await axios.delete(`http://localhost:5000/transactions/${id}`)
         } catch (error) {
             console.log("Error:", error);
         }
+        axios.get("http://localhost:5000/transactions")
+            .then((response) => {
+                setTransaction(response.data);
+            })
+            .catch((error) => console.error("Error fetching transactions", error));
+        setTransaction(prevTransactions => {
+            return prevTransactions.filter((t) => t.id != id);
+        });
+
+    };
+
+    const addTransaction = async (value, text, startDate, type) => {
+        const newTrans = {
+            id: crypto.randomUUID(),
+            amount: value,
+            comment: text,
+            date: new Date(startDate),
+            type: type
+        }
+        // setTransaction(prevTransactions => {
+        //     return [...prevTransactions, newTrans];
+        // });
+        postTransaction(newTrans);
+
+
+        // try {
+        //     axios.post("http://localhost:5000/transactions", transactions)
+        // } catch (error) {
+        //     console.log("Error:", error);
+        // }
     }
-    
+    const postTransaction = async (newTrans) => {
+        try {
+            await axios.post("http://localhost:5000/transactions", newTrans)      //postina nauja transakcija  newTrans
+        } catch (error) {
+            console.log("Error:", error);
+        }
+        axios.get("http://localhost:5000/transactions")                           //is naujo gettina visas transakcijas, kad is naujo budgetTracker moduli parenderintu
+            .then((response) => {
+                setTransaction(response.data);
+            })
+            .catch((error) => console.error("Error fetching transactions", error));
+    }
+
 
     const filteredTransactions = transactions.filter((transac) => {
         if (parseInt(month) != 99) {
@@ -96,18 +117,18 @@ export default function BudgetTracker() {
     //////////////////////
 
     let balance = transactions.reduce((accumulator, transac) => {
-        return parseInt(accumulator) + parseInt(transac.ammount);
+        return parseInt(accumulator) + parseInt(transac.amount);
     }, 0);
 
-    const negAmmount = doubleFilterred.filter((transac) => parseInt(transac.ammount) < 0)
-    const posAmmount = doubleFilterred.filter((transac) => parseInt(transac.ammount) > 0)
+    const negAmount = doubleFilterred.filter((transac) => parseInt(transac.amount) < 0)
+    const posAmount = doubleFilterred.filter((transac) => parseInt(transac.amount) > 0)
 
-    let expense = negAmmount.reduce((accumulator, transac) => {
-        return parseInt(accumulator) + parseInt(transac.ammount);
+    let expense = negAmount.reduce((accumulator, transac) => {
+        return parseInt(accumulator) + parseInt(transac.amount);
     }, 0);
 
-    let income = posAmmount.reduce((accumulator, transac) => {
-        return parseInt(accumulator) + parseInt(transac.ammount);
+    let income = posAmount.reduce((accumulator, transac) => {
+        return parseInt(accumulator) + parseInt(transac.amount);
     }, 0);
 
     //////////////////////

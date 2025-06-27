@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
 import axios from "axios";
 
-export default function BudgetForm({ addTransaction, handleClose }) {
+export default function BudgetForm({ addTransaction, handleClose, postTransaction}) {
 
     const [value, setValue] = useState("");
     const [text, setText] = useState("");
@@ -31,10 +31,16 @@ export default function BudgetForm({ addTransaction, handleClose }) {
         e.preventDefault();
         if (!value || !text) return;
         addTransaction(value, text, startDate, type);
+        // postTransaction(value, text, startDate, type);
         setText("");
         setValue("");
         handleClose();
     }
+    const transactionTypes = [
+        "income", "utilities", "groceries", "entertainment",
+        "rent", "transportation", "health", "shopping", "subscriptions", "gift"
+    ];
+
     return (
 
         <form onSubmit={handleSubmit} style={{/*  position: "sticky", top: "0"  */}} className="budgetForm" >
@@ -51,7 +57,7 @@ export default function BudgetForm({ addTransaction, handleClose }) {
                 />
                 <input
                     type="number"
-                    placeholder="Enter Ammount"
+                    placeholder="Enter Amount"
                     id="number"
                     onChange={handleChangeVal}
                     value={value}
