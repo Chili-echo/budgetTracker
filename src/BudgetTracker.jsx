@@ -37,7 +37,7 @@ export default function BudgetTracker() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/transactions")
+        axios.get("https://budgettrackerback-x2tn.onrender.com/transactions")
             .then((response) => {
                 setTransaction(response.data);
             })
@@ -46,11 +46,11 @@ export default function BudgetTracker() {
 
     const removeTransaction = async (id) => {                                 //delete button on transactions
         try {
-            await axios.delete(`http://localhost:5000/transactions/${id}`)
+            await axios.delete(`https://budgettrackerback-x2tn.onrender.com/transactions/${id}`)
         } catch (error) {
             console.log("Error:", error);
         }
-        axios.get("http://localhost:5000/transactions")
+        axios.get("https://budgettrackerback-x2tn.onrender.com/transactions")
             .then((response) => {
                 setTransaction(response.data);
             })
@@ -83,11 +83,11 @@ export default function BudgetTracker() {
     }
     const postTransaction = async (newTrans) => {
         try {
-            await axios.post("http://localhost:5000/transactions", newTrans)      //postina nauja transakcija  newTrans
+            await axios.post("https://budgettrackerback-x2tn.onrender.com/transactions", newTrans)      //postina nauja transakcija  newTrans
         } catch (error) {
             console.log("Error:", error);
         }
-        axios.get("http://localhost:5000/transactions")                           //is naujo gettina visas transakcijas, kad is naujo budgetTracker moduli parenderintu
+        axios.get("https://budgettrackerback-x2tn.onrender.com/transactions")                           //is naujo gettina visas transakcijas, kad is naujo budgetTracker moduli parenderintu
             .then((response) => {
                 setTransaction(response.data);
             })
