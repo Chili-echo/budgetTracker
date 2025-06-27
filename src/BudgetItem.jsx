@@ -36,7 +36,7 @@ export default function BudgetItem({ transaction, remove }) {
                     </div>
                     <span className='listDate'>{formatedDate}</span>
                 </div>
-                <div className='rightListItem' style={(transaction.ammount > 0) ? {color: '#4CAF93'} : {color: '#FF6B6B'}}>{transaction.ammount} €</div>
+                <div className='rightListItem' style={(transaction.amount > 0) ? {color: '#4CAF93'} : {color: '#FF6B6B'}}>{transaction.amount} €</div>
             </li>
 
         </>
