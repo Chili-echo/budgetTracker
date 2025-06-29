@@ -12,9 +12,11 @@ span {
   all: unset;
 }
 
+@media only screen and (max-width: 768px) {
+}
+
 #root {
   margin: 0 auto;
-
 }
 
 .app {
@@ -23,20 +25,19 @@ span {
 }
 
 body {
-  font-family:'Funnel Sans', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Funnel Sans", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0 !important;
   padding: 0 !important;
-  background-color: #E8F5F0
+  background-color: #e8f5f0;
 }
-
 
 .listStyle {
   transition: all 1s ease-out;
 }
 .mainSection {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 1248px;
@@ -47,24 +48,34 @@ body {
   justify-content: space-evenly;
 }
 
+@media only screen and (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+  }
+}
 
 .balanceModule {
-  color: #4B5563;
+  color: #4b5563;
   padding: 24px;
-  max-width: 400px;
-  max-height: 148px;
+  /* max-width: 400px;
+  max-height: 148px; */
   width: 400px;
   border-radius: 12px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   text-align: left;
   font-size: 16px;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.055);
+  margin-bottom: 20px; /* naujas */
 }
-.balanceModule:nth-child(2) {
-  margin: 0 24px;
+
+@media only screen and (max-width: 768px) {
+  .balanceModule:nth-child(2) {
+    margin: 0 24px;
+  }
 }
+
 .balanceModule h2 {
-  color: #1F2937;
+  color: #1f2937;
   font-size: 24px;
 }
 
@@ -74,12 +85,12 @@ body {
 }
 
 .innerModule:first-child {
-  color: #4B5563;
+  color: #4b5563;
 }
 
 .listSection {
   text-align: left;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin-top: 24px;
   border-radius: 12px;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.055);
@@ -91,9 +102,9 @@ body {
 }
 
 .recentTransactions {
-  color: #1F2937;
+  color: #1f2937;
   margin: 24px;
-  font-weight:bold;
+  font-weight: bold;
   font-size: 20px;
 }
 
@@ -105,20 +116,19 @@ body {
   font-size: 16px;
   box-shadow: none;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: unset;
-  background-color: #4CAF93;
+  background-color: #4caf93;
   height: 42px;
   border-radius: 8px;
 }
-
 
 .selectButtons select {
   text-align: center;
   padding: 10px;
   font-size: 16px;
   font-family: unset;
-  background-color: #F5F9F7;
+  background-color: #f5f9f7;
   height: 42px;
   border-radius: 8px;
   border: none;
@@ -129,7 +139,7 @@ body {
 }
 
 .selectButtons select:hover {
-  outline: 1px solid #4CAF93;
+  outline: 1px solid #4caf93;
 }
 
 .sortBy {
@@ -147,8 +157,8 @@ body {
 
 .budgetList {
   font-size: 16px;
-  font-weight:light;
-  color: #1F2937;
+  font-weight: light;
+  color: #1f2937;
 }
 
 .listLine {
@@ -182,8 +192,8 @@ body {
   text-align: center;
   width: 30px;
   height: 30px;
-  background-color: #E8F5F0;
-  color: #4CAF93;
+  background-color: #e8f5f0;
+  color: #4caf93;
   padding: 5px;
   border-radius: 30px;
 }
@@ -203,7 +213,7 @@ body {
 }
 
 .budgetForm {
-  background-color: #E8F5F0;
+  background-color: #e8f5f0;
   padding: 30px;
   border-radius: 12px;
   display: flex;
@@ -224,15 +234,15 @@ body {
   margin: auto;
 }
 
-.formItem select{
+.formItem select {
   text-align: center;
   padding: 10px;
   font-size: 16px;
   font-family: unset;
-  background-color: #F5F9F7;
+  background-color: #f5f9f7;
   height: 42px;
   border-radius: 8px;
-  border: none
+  border: none;
 }
 
 .formItem {
@@ -241,10 +251,10 @@ body {
   padding: 5px;
   font-size: 16px;
   font-family: unset;
-  background-color: #F5F9F7;
+  background-color: #f5f9f7;
   /* height: 42px; */
   border-radius: 8px;
-  border: 1px solid #1F2937;
+  border: 1px solid #1f2937;
 }
 
 .formItemButton {
@@ -255,15 +265,15 @@ body {
   font-size: 16px;
   box-shadow: none;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: unset;
-  background-color: #4CAF93;
+  background-color: #4caf93;
   height: 42px;
   border-radius: 8px;
 }
 
 .formItemButton:last-child {
-  background-color: #FF6B6B;
+  background-color: #ff6b6b;
 }
 .formItemButtonExpense {
   background-color: #81c6ff;
@@ -277,7 +287,7 @@ body {
 }
 
 .emptyTransacs {
-  color: #4B5563;
+  color: #4b5563;
   display: flex;
   text-align: center;
   align-items: center;
@@ -285,11 +295,11 @@ body {
 }
 
 .seeMore {
-  color: #4CAF93;
+  color: #4caf93;
   font-size: 16px;
   padding: 10px;
   margin: 34px 44px;
-  outline: 1px solid #4CAF93;
+  outline: 1px solid #4caf93;
   border-radius: 5px;
   text-align: center;
 }
@@ -299,13 +309,13 @@ body {
   justify-content: space-between;
   margin-bottom: 32px;
   height: 64px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .logo {
   font-size: 20px;
   font-weight: 400;
-  color: #1F2937;
+  color: #1f2937;
   text-decoration: none;
   margin-left: 80px;
   justify-content: center;
@@ -315,7 +325,7 @@ body {
 .profile {
   font-size: 20px;
   font-weight: 400;
-  color: #1F2937;
+  color: #1f2937;
   text-decoration: none;
   margin-right: 80px;
   justify-content: center;
